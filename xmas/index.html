@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Xmas</title>
+    <script type="text/javascript" src="https://raw.githubusercontent.com/scottschiller/Snowstorm/master/snowstorm.js"></script>
+    <style>
+      img#eli {
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin:-60px 0 0 -60px;
+          -webkit-animation:spin 5s linear infinite;
+          -moz-animation:spin 5s linear infinite;
+          animation:spin 5s linear infinite;
+      }
+      @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+      @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+      @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+    </style>
+    <script>
+      function getClockStr(deadline) {
+        var diff = Date.parse(deadline) - Date.parse(new Date());
+        var seconds = Math.floor( (diff/1000) % 60 );
+        var minutes = Math.floor( (diff/1000/60) % 60 );
+        var hours = Math.floor( (diff/(1000*60*60)) % 24 );
+        var days = Math.floor( diff/(1000*60*60*24) );
+        return days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds ";
+      }
+
+      function clock(clockId, deadline){
+        var timeinterval = setInterval(function(){
+          document.getElementById(clockId).innerHTML = getClockStr(deadline);
+          if(Date.parse(deadline) <= Date.parse(new Date())){
+            clearInterval(timeinterval);
+          }
+        }, 1000);
+      }
+
+      clock("clock","2016-12-24");
+    </script>
+  </head>
+  <body style="background: #1f0000">
+
+    <center><div style="color: white; font-size: 30pt; margin-top: 10%" id="clock"></div><center>
+
+    <img id="eli" src="https://cdn.discordapp.com/avatars/210516553685401600/fe770b8f16218f9618cab33f485db2dc.jpg" alt="funny Eli face" width="128" height="128">
+
+    <iframe style="visibility: hidden" width="560" height="315" src="https://www.youtube.com/embed/mlb5go7FRYw?autoplay=1&start=4" frameborder="0" allowfullscreen></iframe>
+  </body>
+</html>
